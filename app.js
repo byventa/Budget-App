@@ -8,12 +8,10 @@ var uiController = (function(){
         inputDescription: '.add__description',
         inputValue: '.add__value',
         inputButton: '.add__btn'
-
     };
     return {
         getInput: function(){
             return{
-        inputType: '.add__type',
                 type: document.querySelector(domStrings.inputType).value,
                 description: document.querySelector(domStrings.inputDescription).value,
                 value: document.querySelector(domStrings.inputValue).value
@@ -26,17 +24,25 @@ var uiController = (function(){
 })();
 ///////////////////////////////////////////////////
 var appController = (function(uiCtrl,budgetCtrl){
-    var DOM = uiCtrl.getDOMstrings();
-    console.log(DOM);
+
+    var setupEventListeners = function(){
+        var DOM = uiCtrl.getDOMstrings();
+        document.querySelector(DOM.inputButton).addEventListener('click',ctrlAddItem);
+        document.addEventListener('keypress',function(event){
+            if(event.which === 13){ctrlAddItem();}
+        });
+    };
+
     var ctrlAddItem = function(){
         var input = uiCtrl.getInput();
         console.log(input);
-
-
-
     };
-    document.querySelector(DOM.inputButton).addEventListener('click',ctrlAddItem);
-    document.addEventListener('keypress',function(event){
-        if(event.which === 13){ctrlAddItem();}
-    });
+
+    return {
+        init:function(){
+            console.log('app started');
+            setupEventListeners();
+        }
+    }
 })(uiController,budgetController);
+appController.init();
