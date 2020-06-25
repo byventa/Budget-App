@@ -1,4 +1,12 @@
 var budgetController = (function(){
-    var x = 
 
 })();
+
+
+var uiController = (function(){
+    
+})();
+
+var appController = (function(uiCtrl,budgetCtrl){
+    
+})(budgetController,uiController);
